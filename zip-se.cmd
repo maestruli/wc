@@ -7,6 +7,7 @@ set READYDIR=%APPLOC%\ready
 set ZIPEXEC=%APPLOC%\zip.exe
 set SEEXEC=%APPLOC%\se.exe
 set LOGFILE=%APPLOC%\wc.log
+set /A FILEMAXAGE=20
 
 echo %date% - %time%  Program start  >> "%LOGFILE%"
 :: Check directories 
@@ -54,10 +55,15 @@ echo Sending message for Batch %num% >> "%LOGFILE%"
 if not "%ErrorLevel%" == "1" (
 	goto clean
 )
+
 :clean 
+:: Clean old files
 echo Cleaning ZIP file >> "%LOGFILE%"
 cd %READYDIR%
-del %num%.zip /S /Q
+ren %num%.zip %num%.sent
+echo Deleting files with max age %FILEMAXAGE% days >> "%LOGFILE%"
+forfiles /P "%READYDIR%" /S /M *.sent /D -%FILEMAXAGE% /C "cmd /c del @path" 2>nul
 
 :end
 echo %date% - %time% Program end >> "%LOGFILE%"
+exit /b 0
